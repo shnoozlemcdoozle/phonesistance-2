@@ -66,29 +66,28 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
         var socket = io();
-        var username = null;
-        var userCookie = null;
-
+            
         socket.on('connectionUser', function() {
-            if (username === null) {
+            if (document.cookie.length != 0) {
+                var cookieUsername = document.cookie.split("=");
+                var playerUsername = cookieUsername[1]; 
+                console.log('cookie was read' + playerUsername);
+            }
+            else {
                 bootbox.prompt({ 
                 size: "medium",
                 title: "What is your name?", 
                 closeButton: false,
                 callback: function(result){ 
-                    username = result;
-                    document.cookie = '"username = ' + result + '"';
-                    userCookie = document.cookie;
-                    console.log(userCookie);
+                    document.cookie = "username=" + result;
+                    var playerUsername = result;
+                    console.log('no cookie read' + playerUsername);
                     socket.emit('userConnected', username, userCookie)
                 }
 })
             
-        } else if (username ==! null) {
-            socket.emit('userConnected', username, userCookie);
-            console.log(userCookie);
-        }
-})
+       
+}});
         
     </script>
 </body>
