@@ -67,6 +67,16 @@
         var sentTeam = 0;
         var numberOfPlayersInGameVoting = 0;
 
+        function onBodyLoad() {
+            $("poke").bind('taphold', function (event) {
+                event.preventDefault();
+            });
+            $("teamSpot").bind('taphold', function (event) {
+                event.preventDefault();
+            });
+        }
+        
+
         // Check for a username cookie and if not, ask for username - then send username
 
         socket.on('connectionUser', function () {
@@ -107,8 +117,8 @@
             });
         });
         document.getElementById("poke").style.display = "none";
-        
-        socket.on('showTeamButton', function(numberOfPlayersBoard) {
+
+        socket.on('showTeamButton', function (numberOfPlayersBoard) {
             numberOfPlayersInGameVoting = numberOfPlayersBoard;
             document.getElementById("poke").style.display = "inline";
             sentTeam = 0;
@@ -142,9 +152,9 @@
                 $('#box5').empty().append("5");
             }
         });
-    
 
-        document.getElementById("teamSpot").style.display = "none"; 
+
+        document.getElementById("teamSpot").style.display = "none";
         $('#poke').on('click touchstart', function () {
             document.getElementById("teamSpot").style.display = "inline";
             document.getElementById("poke").style.display = "none";
@@ -251,7 +261,7 @@
 
         // VOTING STUFF
         // TEAM VOTING
-        
+
         $('#teamVoteBtn').click(function () {
             socket.emit('teamVoteBtnOnClick');
         });
@@ -260,7 +270,7 @@
             bootbox.confirm({
                 title: "Team Vote",
                 message: "Would you like to approve the team proposed?",
-                onEscape: function(){},
+                onEscape: function () { },
                 closeButton: true,
                 buttons: {
                     confirm: {
@@ -383,29 +393,29 @@
                     ],
                     callback: function (result) {
                         if (result != null) {
-                        console.log(result);
-                        var resultArray = Array.from(result);
-                        var resultLength = result.length;
-                        console.log("RA : " + resultArray);
-                        var missionPlayerOne = players[resultArray[0]];
-                        var missionPlayerTwo = players[resultArray[1]];
-                        console.log(missionPlayerOne);
-                        var playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo;
-                        console.log(playersInCurrentMission);
-                        if (resultLength > 2) {
-                            var missionPlayerThree = players[resultArray[2]];;
-                            playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo + ", " + missionPlayerThree;
+                            console.log(result);
+                            var resultArray = Array.from(result);
+                            var resultLength = result.length;
+                            console.log("RA : " + resultArray);
+                            var missionPlayerOne = players[resultArray[0]];
+                            var missionPlayerTwo = players[resultArray[1]];
+                            console.log(missionPlayerOne);
+                            var playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo;
+                            console.log(playersInCurrentMission);
+                            if (resultLength > 2) {
+                                var missionPlayerThree = players[resultArray[2]];;
+                                playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo + ", " + missionPlayerThree;
+                            }
+                            if (resultLength > 3) {
+                                var missionPlayerFour = players[resultArray[3]];;
+                                playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo + ", " + missionPlayerThree + ", " + missionPlayerFour;
+                            }
+                            if (resultLength > 4) {
+                                var missionPlayerFive = players[resultArray[4]];;
+                                playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo + ", " + missionPlayerThree + ", " + missionPlayerFour + ", " + missionPlayerFive;
+                            }
+                            socket.emit('missionVoteBtnOnClick', result, resultLength, playersInCurrentMission);
                         }
-                        if (resultLength > 3) {
-                            var missionPlayerFour = players[resultArray[3]];;
-                            playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo + ", " + missionPlayerThree + ", " + missionPlayerFour;
-                        }
-                        if (resultLength > 4) {
-                            var missionPlayerFive = players[resultArray[4]];;
-                            playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo + ", " + missionPlayerThree + ", " + missionPlayerFour + ", " + missionPlayerFive;
-                        }
-                        socket.emit('missionVoteBtnOnClick', result, resultLength, playersInCurrentMission);
-                    }
                     }
                 });
             }
@@ -441,28 +451,28 @@
                     ],
                     callback: function (result) {
                         if (result != null) {
-                        console.log(result);
-                        var resultArray = Array.from(result);
-                        var resultLength = result.length;
-                        console.log("RA : " + resultArray);
-                        var missionPlayerOne = players[resultArray[0]];
-                        var missionPlayerTwo = players[resultArray[1]];
-                        console.log(missionPlayerOne);
-                        var playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo;
-                        console.log(playersInCurrentMission);
-                        if (resultLength > 2) {
-                            var missionPlayerThree = players[resultArray[2]];;
-                            playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo + ", " + missionPlayerThree;
-                        }
-                        if (resultLength > 3) {
-                            var missionPlayerFour = players[resultArray[3]];;
-                            playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo + ", " + missionPlayerThree + ", " + missionPlayerFour;
-                        }
-                        if (resultLength > 4) {
-                            var missionPlayerFive = players[resultArray[4]];;
-                            playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo + ", " + missionPlayerThree + ", " + missionPlayerFour + ", " + missionPlayerFive;
-                        }
-                        socket.emit('missionVoteBtnOnClick', result, resultLength, playersInCurrentMission);
+                            console.log(result);
+                            var resultArray = Array.from(result);
+                            var resultLength = result.length;
+                            console.log("RA : " + resultArray);
+                            var missionPlayerOne = players[resultArray[0]];
+                            var missionPlayerTwo = players[resultArray[1]];
+                            console.log(missionPlayerOne);
+                            var playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo;
+                            console.log(playersInCurrentMission);
+                            if (resultLength > 2) {
+                                var missionPlayerThree = players[resultArray[2]];;
+                                playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo + ", " + missionPlayerThree;
+                            }
+                            if (resultLength > 3) {
+                                var missionPlayerFour = players[resultArray[3]];;
+                                playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo + ", " + missionPlayerThree + ", " + missionPlayerFour;
+                            }
+                            if (resultLength > 4) {
+                                var missionPlayerFive = players[resultArray[4]];;
+                                playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo + ", " + missionPlayerThree + ", " + missionPlayerFour + ", " + missionPlayerFive;
+                            }
+                            socket.emit('missionVoteBtnOnClick', result, resultLength, playersInCurrentMission);
                         }
                     }
                 });
@@ -503,28 +513,28 @@
                     ],
                     callback: function (result) {
                         if (result != null) {
-                        console.log(result);
-                        var resultArray = Array.from(result);
-                        var resultLength = result.length;
-                        console.log("RA : " + resultArray);
-                        var missionPlayerOne = players[resultArray[0]];
-                        var missionPlayerTwo = players[resultArray[1]];
-                        console.log(missionPlayerOne);
-                        var playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo;
-                        console.log(playersInCurrentMission);
-                        if (resultLength > 2) {
-                            var missionPlayerThree = players[resultArray[2]];;
-                            playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo + ", " + missionPlayerThree;
-                        }
-                        if (resultLength > 3) {
-                            var missionPlayerFour = players[resultArray[3]];;
-                            playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo + ", " + missionPlayerThree + ", " + missionPlayerFour;
-                        }
-                        if (resultLength > 4) {
-                            var missionPlayerFive = players[resultArray[4]];;
-                            playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo + ", " + missionPlayerThree + ", " + missionPlayerFour + ", " + missionPlayerFive;
-                        }
-                        socket.emit('missionVoteBtnOnClick', result, resultLength, playersInCurrentMission);
+                            console.log(result);
+                            var resultArray = Array.from(result);
+                            var resultLength = result.length;
+                            console.log("RA : " + resultArray);
+                            var missionPlayerOne = players[resultArray[0]];
+                            var missionPlayerTwo = players[resultArray[1]];
+                            console.log(missionPlayerOne);
+                            var playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo;
+                            console.log(playersInCurrentMission);
+                            if (resultLength > 2) {
+                                var missionPlayerThree = players[resultArray[2]];;
+                                playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo + ", " + missionPlayerThree;
+                            }
+                            if (resultLength > 3) {
+                                var missionPlayerFour = players[resultArray[3]];;
+                                playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo + ", " + missionPlayerThree + ", " + missionPlayerFour;
+                            }
+                            if (resultLength > 4) {
+                                var missionPlayerFive = players[resultArray[4]];;
+                                playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo + ", " + missionPlayerThree + ", " + missionPlayerFour + ", " + missionPlayerFive;
+                            }
+                            socket.emit('missionVoteBtnOnClick', result, resultLength, playersInCurrentMission);
                         }
                     }
                 });
@@ -569,28 +579,28 @@
                     ],
                     callback: function (result) {
                         if (result != null) {
-                        console.log(result);
-                        var resultArray = Array.from(result);
-                        var resultLength = result.length;
-                        console.log("RA : " + resultArray);
-                        var missionPlayerOne = players[resultArray[0]];
-                        var missionPlayerTwo = players[resultArray[1]];
-                        console.log(missionPlayerOne);
-                        var playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo;
-                        console.log(playersInCurrentMission);
-                        if (resultLength > 2) {
-                            var missionPlayerThree = players[resultArray[2]];;
-                            playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo + ", " + missionPlayerThree;
-                        }
-                        if (resultLength > 3) {
-                            var missionPlayerFour = players[resultArray[3]];;
-                            playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo + ", " + missionPlayerThree + ", " + missionPlayerFour;
-                        }
-                        if (resultLength > 4) {
-                            var missionPlayerFive = players[resultArray[4]];;
-                            playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo + ", " + missionPlayerThree + ", " + missionPlayerFour + ", " + missionPlayerFive;
-                        }
-                        socket.emit('missionVoteBtnOnClick', result, resultLength, playersInCurrentMission);
+                            console.log(result);
+                            var resultArray = Array.from(result);
+                            var resultLength = result.length;
+                            console.log("RA : " + resultArray);
+                            var missionPlayerOne = players[resultArray[0]];
+                            var missionPlayerTwo = players[resultArray[1]];
+                            console.log(missionPlayerOne);
+                            var playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo;
+                            console.log(playersInCurrentMission);
+                            if (resultLength > 2) {
+                                var missionPlayerThree = players[resultArray[2]];;
+                                playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo + ", " + missionPlayerThree;
+                            }
+                            if (resultLength > 3) {
+                                var missionPlayerFour = players[resultArray[3]];;
+                                playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo + ", " + missionPlayerThree + ", " + missionPlayerFour;
+                            }
+                            if (resultLength > 4) {
+                                var missionPlayerFive = players[resultArray[4]];;
+                                playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo + ", " + missionPlayerThree + ", " + missionPlayerFour + ", " + missionPlayerFive;
+                            }
+                            socket.emit('missionVoteBtnOnClick', result, resultLength, playersInCurrentMission);
                         }
                     }
                 });
@@ -639,28 +649,28 @@
                     ],
                     callback: function (result) {
                         if (result != null) {
-                        console.log(result);
-                        var resultArray = Array.from(result);
-                        var resultLength = result.length;
-                        console.log("RA : " + resultArray);
-                        var missionPlayerOne = players[resultArray[0]];
-                        var missionPlayerTwo = players[resultArray[1]];
-                        console.log(missionPlayerOne);
-                        var playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo;
-                        console.log(playersInCurrentMission);
-                        if (resultLength > 2) {
-                            var missionPlayerThree = players[resultArray[2]];;
-                            playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo + ", " + missionPlayerThree;
-                        }
-                        if (resultLength > 3) {
-                            var missionPlayerFour = players[resultArray[3]];;
-                            playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo + ", " + missionPlayerThree + ", " + missionPlayerFour;
-                        }
-                        if (resultLength > 4) {
-                            var missionPlayerFive = players[resultArray[4]];;
-                            playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo + ", " + missionPlayerThree + ", " + missionPlayerFour + ", " + missionPlayerFive;
-                        }
-                        socket.emit('missionVoteBtnOnClick', result, resultLength, playersInCurrentMission);
+                            console.log(result);
+                            var resultArray = Array.from(result);
+                            var resultLength = result.length;
+                            console.log("RA : " + resultArray);
+                            var missionPlayerOne = players[resultArray[0]];
+                            var missionPlayerTwo = players[resultArray[1]];
+                            console.log(missionPlayerOne);
+                            var playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo;
+                            console.log(playersInCurrentMission);
+                            if (resultLength > 2) {
+                                var missionPlayerThree = players[resultArray[2]];;
+                                playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo + ", " + missionPlayerThree;
+                            }
+                            if (resultLength > 3) {
+                                var missionPlayerFour = players[resultArray[3]];;
+                                playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo + ", " + missionPlayerThree + ", " + missionPlayerFour;
+                            }
+                            if (resultLength > 4) {
+                                var missionPlayerFive = players[resultArray[4]];;
+                                playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo + ", " + missionPlayerThree + ", " + missionPlayerFour + ", " + missionPlayerFive;
+                            }
+                            socket.emit('missionVoteBtnOnClick', result, resultLength, playersInCurrentMission);
                         }
                     }
                 });
@@ -713,34 +723,33 @@
                     ],
                     callback: function (result) {
                         if (result != null) {
-                        console.log(result);
-                        var resultArray = Array.from(result);
-                        var resultLength = result.length;
-                        console.log("RA : " + resultArray);
-                        var missionPlayerOne = players[resultArray[0]];
-                        var missionPlayerTwo = players[resultArray[1]];
-                        console.log(missionPlayerOne);
-                        var playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo;
-                        console.log(playersInCurrentMission);
-                        if (resultLength > 2) {
-                            var missionPlayerThree = players[resultArray[2]];;
-                            playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo + ", " + missionPlayerThree;
-                        }
-                        if (resultLength > 3) {
-                            var missionPlayerFour = players[resultArray[3]];;
-                            playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo + ", " + missionPlayerThree + ", " + missionPlayerFour;
-                        }
-                        if (resultLength > 4) {
-                            var missionPlayerFive = players[resultArray[4]];;
-                            playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo + ", " + missionPlayerThree + ", " + missionPlayerFour + ", " + missionPlayerFive;
-                        }
-                        socket.emit('missionVoteBtnOnClick', result, resultLength, playersInCurrentMission);
+                            console.log(result);
+                            var resultArray = Array.from(result);
+                            var resultLength = result.length;
+                            console.log("RA : " + resultArray);
+                            var missionPlayerOne = players[resultArray[0]];
+                            var missionPlayerTwo = players[resultArray[1]];
+                            console.log(missionPlayerOne);
+                            var playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo;
+                            console.log(playersInCurrentMission);
+                            if (resultLength > 2) {
+                                var missionPlayerThree = players[resultArray[2]];;
+                                playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo + ", " + missionPlayerThree;
+                            }
+                            if (resultLength > 3) {
+                                var missionPlayerFour = players[resultArray[3]];;
+                                playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo + ", " + missionPlayerThree + ", " + missionPlayerFour;
+                            }
+                            if (resultLength > 4) {
+                                var missionPlayerFive = players[resultArray[4]];;
+                                playersInCurrentMission = missionPlayerOne + ", " + missionPlayerTwo + ", " + missionPlayerThree + ", " + missionPlayerFour + ", " + missionPlayerFive;
+                            }
+                            socket.emit('missionVoteBtnOnClick', result, resultLength, playersInCurrentMission);
                         }
                     }
                 });
             }
         })
-
     </script>
 </body>
 

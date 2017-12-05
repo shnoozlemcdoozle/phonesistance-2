@@ -61,6 +61,8 @@ body {
 
 #poke {
   top: 20px;
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
 }
 
 #box1, #box2, #box3, #box4, #box5 {
@@ -105,10 +107,8 @@ body {
 
 #teamSpot {
   margin-top: 4%;
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */     
+ -webkit-touch-callout: none !important;
+ -webkit-user-select: none !important;     
 }
 
 /* Responsive: Portrait tablets and up */
