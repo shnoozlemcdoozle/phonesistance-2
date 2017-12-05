@@ -67,9 +67,10 @@ io.sockets.on('connection', function (socket) {
     })
 
     socket.on('startGame', function(numberOfPlayers) {
-        var deckWordHelp = 'cards' + "'" + numberOfPlayers + "'";
+        var deckWordHelp = 'cards' + numberOfPlayers
         pickedDeck = deckWordHelp;
         console.log(pickedDeck);
+        console.log(pickedDeck[2]);
     })
 
 
