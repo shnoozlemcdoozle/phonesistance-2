@@ -79,13 +79,14 @@
                     username = result;
                     document.cookie = '"username = ' + result + '"';
                     userCookie = document.cookie;
-                    console.log = userCookie;
+                    console.log(userCookie);
                     socket.emit('userConnected', username, userCookie)
                 }
 })
             
         } else if (username ==! null) {
             socket.emit('userConnected', username, userCookie);
+            console.log(userCookie);
         }
 })
         
