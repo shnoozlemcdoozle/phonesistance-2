@@ -180,7 +180,7 @@ io.sockets.on('connection', function (socket) {
         teamVoteResponses += 1;
         socket.emit('playerVotedTeam', teamVoteResponses, dictatedPlayersInGame);
         socket.broadcast.emit('playerVotedTeam', teamVoteResponses, dictatedPlayersInGame);
-        if (teamVoteResponses == playersInGame) {
+        if (teamVoteResponses == dictatedPlayersInGame) {
             socket.emit('teamVoteFinished', teamVoteApprove, teamVoteVeto);
             socket.broadcast.emit('teamVoteFinished', teamVoteApprove, teamVoteVeto);
             console.log("Team vote is finished")
@@ -192,7 +192,7 @@ io.sockets.on('connection', function (socket) {
         teamVoteResponses += 1;
         socket.emit('playerVotedTeam', teamVoteResponses, dictatedPlayersInGame);
         socket.broadcast.emit('playerVotedTeam', teamVoteResponses, dictatedPlayersInGame);
-        if (teamVoteResponses == playersInGame) {
+        if (teamVoteResponses == dictatedPlayersInGame) {
             socket.emit('teamVoteFinished', teamVoteApprove, teamVoteVeto);
             socket.broadcast.emit('teamVoteFinished', teamVoteApprove, teamVoteVeto);
             console.log("Team vote is finished")
