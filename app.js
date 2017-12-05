@@ -39,6 +39,7 @@ io.sockets.on('connection', function (socket) {
 
     socket.on('userConnected', function(username) {
         playersInGame.push(username);
+        socket.username = username;
         socket.broadcast.emit('playersInGameUpdate', playersInGame);
         socket.emit('playersInGameUpdate', playersInGame);
         console.log(playersInGame);
@@ -46,12 +47,10 @@ io.sockets.on('connection', function (socket) {
     });
 
     socket.on('disconnect', function() {
-        console.log(socket.id + " disconnected");
-        var index = playersInGameSocketIds.indexOf(socket.id);
+        console.log(socket.username + " disconnected");
+        var index = playersInGame.indexOf(socket.username);
         console.log(index);
-        playersInGameSocketIds.splice(index, 1);
         playersInGame.splice(index, 1);
-        console.log(playersInGameSocketIds);
         console.log(playersInGame);
         socket.emit('playersInGameUpdate', playersInGame);
     })
