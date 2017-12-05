@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Phonesistance 2</title>
+
+
+</head>
+
+<body>
+
+    <div class="playersSpot">
+        <div class="col-lg-6">
+            <h4>Players in this game</h4>
+            <p id="playersSpot"></p>
+        </div>
+
+        <div class="jumbotron">
+            <h1>Phonesistance</h1>
+            <p class="board" id="box1">2</p>
+            <p class="board" id="box2">3</p>
+            <p class="board" id="box3">2</p>
+            <p class="board" id="box4">3</p>
+            <p class="board" id="box5">3</p>
+            <br>
+            <br>
+            <p id="teamSpot"> </p>
+            <a class="btn btn-lg btn-success" id="poke" href="#" role="button">Reveal your team</a>
+            <br><br>
+            <h4>Start a vote</h4>
+            <div>
+                <a class="btn btn-info" id="teamVoteBtn" href="#" role="button">Team</a>
+                <a class="btn btn-info" id="missionVoteBtn" href="#" role="button">Mission</a>
+            </div>
+            <div>
+                <br>
+                <p id="currentVoteCount"></p>
+            </div>
+
+        </div>
+        <a class="btn btn-xs btn-primary" id="changeNumPlayersBtn" href="#" role="button"># Players</a>
+        <a class="btn btn-xs btn-danger" id="resetBtn" href="#" role="button">Reset the game</a>
+        <a class="btn btn-xs btn-info" id="resetVoteAfterProblem" href="#" role="button">Reset vote xD</a>
+
+        <br><br>
+
+        <p id=currentPlayerConfig></p>
+
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <link href="jumbotron-narrow.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+        var username = null;
+        var userCookie = null;
+
+        socket.on('connectionUser', function() {
+            if (userCookie === null) {
+                bootbox.prompt({ 
+                size: "medium",
+                title: "What is your name?", 
+                closeButton: false,
+                callback: function(result){ 
+                    username = result;
+                    document.cookie = '"username = ' + result + '"';
+                    userCookie = document.cookie;
+                    console.log = userCookie;
+                    socket.emit('userConnected', username, userCookie)
+                }
+})
+            
+        } else if (username ==! null) {
+            socket.emit('userConnected', username, userCookie);
+        }
+})
+        
+    </script>
+</body>
+
+</html>
