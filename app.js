@@ -52,6 +52,7 @@ io.sockets.on('connection', function (socket) {
         console.log(index);
         playersInGame.splice(index, 1);
         console.log(playersInGame);
+        socket.broadcast.emit('playersInGameUpdate', playersInGame);
         socket.emit('playersInGameUpdate', playersInGame);
     })
 
