@@ -70,33 +70,27 @@ io.sockets.on('connection', function (socket) {
         socket.emit('showTeamButton');
         socket.broadcast.emit('showTeamButton');
         if (numberOfPlayers == 5) {
-            pickedDeck = 0;
-            pickedDeck = cards5;
+            pickedDeck == cards5;
             shuffleDeck(pickedDeck);
             console.log('Players set to 5');
         } else if (numberOfPlayers == 6) {
-            pickedDeck = 0;
-            pickedDeck = cards6;
+            pickedDeck == cards6;
             shuffleDeck(pickedDeck);
             console.log('Players set to 6');
         } else if (numberOfPlayers == 7) {
-            pickedDeck = 0;
-            pickedDeck = cards7;
+            pickedDeck == cards7;
             shuffleDeck(pickedDeck);
             console.log('Players set to 7');
         } else if (numberOfPlayers == 8) {
-            pickedDeck = 0;
-            pickedDeck = cards8;
+            pickedDeck == cards8;
             shuffleDeck(pickedDeck);
             console.log('Players set to 8');
         } else if (numberOfPlayers == 9) {
-            pickedDeck = 0;
-            pickedDeck = cards9;
+            pickedDeck == cards9;
             shuffleDeck(pickedDeck);
             console.log('Players set to 9');
         } else if (numberOfPlayers == 10) {
-            pickedDeck = 0;
-            pickedDeck = cards10;
+            pickedDeck == cards10;
             shuffleDeck(pickedDeck);
             console.log('Players set to 10');
         }
