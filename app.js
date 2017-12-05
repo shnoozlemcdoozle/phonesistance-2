@@ -171,9 +171,9 @@ io.sockets.on('connection', function (socket) {
     socket.on('playerVoteApprove', function () {
         teamVoteApprove += 1;
         teamVoteResponses += 1;
-        socket.emit('playerVotedTeam', teamVoteResponses, playersNumber);
-        socket.broadcast.emit('playerVotedTeam', teamVoteResponses, playersNumber);
-        if (teamVoteResponses == playersNumber) {
+        socket.emit('playerVotedTeam', teamVoteResponses, playersInGame);
+        socket.broadcast.emit('playerVotedTeam', teamVoteResponses, playersInGame);
+        if (teamVoteResponses == playersInGame) {
             socket.emit('teamVoteFinished', teamVoteApprove, teamVoteVeto);
             socket.broadcast.emit('teamVoteFinished', teamVoteApprove, teamVoteVeto);
             console.log("Team vote is finished")
@@ -183,9 +183,9 @@ io.sockets.on('connection', function (socket) {
     socket.on('playerVoteVeto', function () {
         teamVoteVeto += 1;
         teamVoteResponses += 1;
-        socket.emit('playerVotedTeam', teamVoteResponses, playersNumber);
-        socket.broadcast.emit('playerVotedTeam', teamVoteResponses, playersNumber);
-        if (teamVoteResponses == playersNumber) {
+        socket.emit('playerVotedTeam', teamVoteResponses, playersInGame);
+        socket.broadcast.emit('playerVotedTeam', teamVoteResponses, playersInGame);
+        if (teamVoteResponses == playersInGame) {
             socket.emit('teamVoteFinished', teamVoteApprove, teamVoteVeto);
             socket.broadcast.emit('teamVoteFinished', teamVoteApprove, teamVoteVeto);
             console.log("Team vote is finished")
