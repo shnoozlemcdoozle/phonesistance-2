@@ -46,8 +46,7 @@
             </div>
 
         </div>
-        <a class="btn btn-xs btn-primary" id="startBtn" href="#" role="button">Start</a>
-        <a class="btn btn-xs btn-danger" id="resetBtn" href="#" role="button">Reset</a>
+        <a class="btn btn-xs btn-primary" id="startBtn" href="#" role="button">   Start/Reset   </a>
 
         <br><br>
 
@@ -65,6 +64,7 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
         var socket = io();
+        var sentTeam = 0;
 
         // Check for a username cookie and if not, ask for username - then send username
 
@@ -105,6 +105,30 @@
                 }
             });
         });
+
+        document.getElementById("teamSpot").style.display = "none"; 
+        $('#poke').on('click touchstart', function () {
+            document.getElementById("teamSpot").style.display = "inline";
+            document.getElementById("poke").style.display = "none";
+            if (sentTeam == 0) {
+                socket.emit('teamRequest');
+                sentTeam += 1;
+            }
+        });
+        $("#poke").on('click touchend', function () {
+            document.getElementById("teamSpot").style.display = "none";
+            document.getElementById("poke").style.display = "inline";
+        });
+
+        socket.on('teamCard', function (team) {
+            $('#teamSpot').append('You are a ' + team);
+        });
+
+
+
+
+
+
     </script>
 </body>
 

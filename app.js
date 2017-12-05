@@ -9,7 +9,7 @@ var cards5 = ['spy!', 'spy!', 'part of the resistance!', 'part of the resistance
     cards10 = ['spy!', 'spy!', 'spy!', 'spy!', 'part of the resistance!', 'part of the resistance!', 'part of the resistance!', 'part of the resistance!', 'part of the resistance!', 'part of the resistance!']
 
 
-var pickedDeck = cards5;
+var pickedDeck = 0;
 var playersInGame = [];
 var teamVoteApprove = 0;
 var teamVoteVeto = 0;
@@ -66,7 +66,7 @@ io.sockets.on('connection', function (socket) {
         socket.emit('playersInGameUpdate', playersInGame);
     })
 
-    socket.on('startGame', function(numberOfPlayers) {
+    socket.on('startGame', function (numberOfPlayers) {
         if (numberOfPlayers == 5) {
             pickedDeck = cards5;
             console.log('Players set to 5');
@@ -88,7 +88,11 @@ io.sockets.on('connection', function (socket) {
         }
     })
 
+    socket.on('teamRequest', function () {
 
+        var chosenCard = pickedDeck.shift();
+
+        socket.emit('teamCard', chosenCard);
 
 
 
