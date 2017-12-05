@@ -70,7 +70,7 @@
         var userCookie = null;
 
         socket.on('connectionUser', function() {
-            if (userCookie === null) {
+            if (username === null) {
                 bootbox.prompt({ 
                 size: "medium",
                 title: "What is your name?", 
