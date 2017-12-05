@@ -11,6 +11,7 @@ var cards5 = ['spy!', 'spy!', 'part of the resistance!', 'part of the resistance
 
 var pickedDeck = cards5;
 var playersInGame = [];
+var playersInGameSocketIds = [];
 
 function shuffleDeck(deck) {
     for (var i = deck.length - 1; i > 0; i--) {
@@ -32,7 +33,7 @@ server.use(express.static(__dirname + '/public'));
 // Loading socket.io
 var io = require('socket.io').listen(server.listen(port));
 
-io.sockets.on('connection', function (socket, username) {
+io.sockets.on('connection', function (socket) {
 
     socket.emit('connectionUser');
 
@@ -43,13 +44,14 @@ io.sockets.on('connection', function (socket, username) {
     });
 
     socket.on('disconnect', function() {
-        console.log(playerUsername + " disconnected");
-        var index = socketIds.indexOf(socket.id);
+        console.log(socket.id + " disconnected");
+        var index = playersInGameSocketIds.indexOf(socket.id);
         console.log(index);
-        socketIds.splice(index, 1);
-        players.splice(index, 1);
-        console.log(socketIds);
-        console.log(players);
+        playersInGameSocketIds.splice(index, 1);
+        playersInGame.splice(index, 1);
+        console.log(playersInGameSocketIds);
+        console.log(playersInGame);
+        socket.emit('playersInGameUpdate', playersInGame);
     })
 
 
