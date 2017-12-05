@@ -36,10 +36,10 @@ io.sockets.on('connection', function (socket, username) {
 
     socket.emit('connectionUser');
 
-    socket.on('userConnected', function(playerUsername) {
-        playersInGame.push(playerUsername);
-        socket.broadcast.emit('playerInGameUpdate', playersInGame);
-        socket.emit('playerInGameUpdate', playersInGame);
+    socket.on('userConnected', function(username) {
+        playersInGame.push(username);
+        socket.broadcast.emit('playersInGameUpdate', playersInGame);
+        socket.emit('playersInGameUpdate', playersInGame);
     });
 
 

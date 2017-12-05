@@ -84,7 +84,7 @@
                         document.cookie = "username=" + result;
                         var playerUsername = result;
                         console.log('no cookie read ' + playerUsername);
-                        socket.emit('userConnected', playerUsername)
+                        socket.emit('userConnected', playerUsername);
                     }
                 })
 
