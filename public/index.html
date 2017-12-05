@@ -93,7 +93,7 @@
         });
 
         socket.on('playersInGameUpdate', function(playersInGame) {
-            $('#playersSpot').empty().append(list.join(', ').toUpperCase());
+            $('#playersSpot').empty().append(playersInGame.join(', ').toUpperCase());
         })
 
 
