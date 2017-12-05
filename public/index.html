@@ -46,9 +46,8 @@
             </div>
 
         </div>
-        <a class="btn btn-xs btn-primary" id="changeNumPlayersBtn" href="#" role="button"># Players</a>
-        <a class="btn btn-xs btn-danger" id="resetBtn" href="#" role="button">Reset the game</a>
-        <a class="btn btn-xs btn-info" id="resetVoteAfterProblem" href="#" role="button">Reset vote xD</a>
+        <a class="btn btn-xs btn-primary" id="startBtn" href="#" role="button">Start</a>
+        <a class="btn btn-xs btn-danger" id="resetBtn" href="#" role="button">Reset</a>
 
         <br><br>
 
@@ -92,14 +91,20 @@
             }
         });
 
-        socket.on('playersInGameUpdate', function(playersInTheGame) {
+        socket.on('playersInGameUpdate', function (playersInTheGame) {
             $('#playersSpot').empty().append(playersInTheGame.join(', ').toUpperCase());
         })
 
-
-
-
-
+        $('#startBtn').on('click', function () {
+            bootbox.prompt({
+                title: "How many players in the new game? (5-10)",
+                inputType: 'number',
+                callback: function (result) {
+                    socket.emit('startGame', result);
+                    console.log(result);
+                }
+            });
+        });
     </script>
 </body>
 

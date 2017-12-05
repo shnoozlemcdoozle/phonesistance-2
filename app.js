@@ -11,7 +11,19 @@ var cards5 = ['spy!', 'spy!', 'part of the resistance!', 'part of the resistance
 
 var pickedDeck = cards5;
 var playersInGame = [];
-var playersInGameSocketIds = [];
+var teamVoteApprove = 0;
+var teamVoteVeto = 0;
+var teamVoteResponses = 0;
+var missionVotePass = 0;
+var missionVoteFail = 0;
+var missionVoteResponses = 0;
+var playersInMissionVote = 0;
+var boxColor1 = 0;
+var boxColor2 = 0;
+var boxColor3 = 0;
+var boxColor4 = 0;
+var boxColor5 = 0;
+
 
 function shuffleDeck(deck) {
     for (var i = deck.length - 1; i > 0; i--) {
@@ -37,7 +49,7 @@ io.sockets.on('connection', function (socket) {
 
     socket.emit('connectionUser');
 
-    socket.on('userConnected', function(username) {
+    socket.on('userConnected', function (username) {
         playersInGame.push(username);
         socket.username = username;
         socket.broadcast.emit('playersInGameUpdate', playersInGame);
@@ -46,16 +58,19 @@ io.sockets.on('connection', function (socket) {
         console.log(playersInGameSocketIds);
     });
 
-    socket.on('disconnect', function() {
+    socket.on('disconnect', function () {
         console.log(socket.username + " disconnected");
         var index = playersInGame.indexOf(socket.username);
-        console.log(index);
         playersInGame.splice(index, 1);
         console.log(playersInGame);
         socket.broadcast.emit('playersInGameUpdate', playersInGame);
         socket.emit('playersInGameUpdate', playersInGame);
     })
 
+    socket.on('startGame', function(numberOfPlayers) {
+        pickedDeck = cards + numberofPlayers
+        console.log(pickedDeck);
+    })
 
 
 
