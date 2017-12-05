@@ -258,6 +258,45 @@
             socket.emit('missionVoteBtnOnClickPart1');
         });
 
+        socket.on('beginTeamVote', function () {
+            bootbox.confirm({
+                title: "Team Vote",
+                message: "Would you like to approve the team proposed?",
+                onEscape: function(){},
+                closeButton: true,
+                buttons: {
+                    confirm: {
+                        label: 'Approve',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: 'Veto',
+                        className: 'btn-danger'
+                    }
+                },
+                callback: function (result) {
+                    console.log('This was logged in the callback: ' + result);
+                    if (result == true) {
+                        socket.emit('playerVoteApprove');
+                    } else if (result == false) {
+                        socket.emit('playerVoteVeto');
+                    }
+                }
+            })
+        });
+
+        socket.on('teamVoteFinished', function (approve, veto) {
+            console.log(approve + "and" + veto)
+            bootbox.alert({
+                message: '<p id="approveMessage">Approve: </p>' + approve + '<p id="vetoMessage">Veto: </p>' + veto,
+                className: 'bb-alternate-modal',
+                title: 'Team Vote',
+                callback: function () {
+                    socket.emit('teamVoteFinishedReset');
+                    $('#currentVoteCount').empty();
+                }
+            });
+        })
 
     </script>
 </body>
