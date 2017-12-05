@@ -9,8 +9,8 @@ var cards5 = ['spy!', 'spy!', 'part of the resistance!', 'part of the resistance
     cards10 = ['spy!', 'spy!', 'spy!', 'spy!', 'part of the resistance!', 'part of the resistance!', 'part of the resistance!', 'part of the resistance!', 'part of the resistance!', 'part of the resistance!']
 
 
-
-pickedDeck = cards5;
+var pickedDeck = cards5;
+var playersInGame = [];
 
 function shuffleDeck(deck) {
     for (var i = deck.length - 1; i > 0; i--) {
@@ -34,9 +34,18 @@ var io = require('socket.io').listen(server.listen(port));
 
 io.sockets.on('connection', function (socket, username) {
 
-socket.emit('connectionUser');
+    socket.emit('connectionUser');
+
+    socket.on('userConnected', function(playerUsername) {
+        playersInGame.push(playerUsername);
+        socket.broadcast.emit('playerInGameUpdate', playersInGame);
+        socket.emit('playerInGameUpdate', playersInGame);
+    });
+
+
+
+
 
 
 
 });
-

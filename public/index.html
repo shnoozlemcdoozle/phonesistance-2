@@ -66,29 +66,40 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
         var socket = io();
-            
-        socket.on('connectionUser', function() {
+
+        // Check for a username cookie and if not, ask for username - then send username
+
+        socket.on('connectionUser', function () {
             if (document.cookie.length != 0) {
                 var cookieUsername = document.cookie.split("=");
-                var playerUsername = cookieUsername[1]; 
-                console.log('cookie was read' + playerUsername);
+                var playerUsername = cookieUsername[1];
+                console.log('cookie was read ' + playerUsername);
+                socket.emit('userConnected', playerUsername);
+            } else {
+                bootbox.prompt({
+                    size: "medium",
+                    title: "What is your name?",
+                    closeButton: false,
+                    callback: function (result) {
+                        document.cookie = "username=" + result;
+                        var playerUsername = result;
+                        console.log('no cookie read ' + playerUsername);
+                        socket.emit('userConnected', playerUsername)
+                    }
+                })
+
+
             }
-            else {
-                bootbox.prompt({ 
-                size: "medium",
-                title: "What is your name?", 
-                closeButton: false,
-                callback: function(result){ 
-                    document.cookie = "username=" + result;
-                    var playerUsername = result;
-                    console.log('no cookie read' + playerUsername);
-                    socket.emit('userConnected', username, userCookie)
-                }
-})
-            
-       
-}});
-        
+        });
+
+        socket.on('playersInGameUpdate', function(playersInGame) {
+            $('#playersSpot').empty().append(list.join(', ').toUpperCase());
+        })
+
+
+
+
+
     </script>
 </body>
 
