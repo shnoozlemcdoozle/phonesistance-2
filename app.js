@@ -11,6 +11,7 @@ var cards5 = ['spy!', 'spy!', 'part of the resistance!', 'part of the resistance
 
 var pickedDeck = 0;
 var playersInGame = [];
+var socketIds = [];
 var dictatedPlayersInGame = 0;
 var teamVoteApprove = 0;
 var teamVoteVeto = 0;
@@ -52,6 +53,7 @@ io.sockets.on('connection', function (socket) {
 
     socket.on('userConnected', function (username) {
         socket.username = username;
+        socketIds.push(socket.id);
         playersInGame.push(socket.username);
         socket.broadcast.emit('playersInGameUpdate', playersInGame);
         socket.emit('playersInGameUpdate', playersInGame);
@@ -65,6 +67,12 @@ io.sockets.on('connection', function (socket) {
         console.log(playersInGame);
         socket.broadcast.emit('playersInGameUpdate', playersInGame);
         socket.emit('playersInGameUpdate', playersInGame);
+
+        console.log(socket.id + " disconnected");
+        var index2 = socketIds.indexOf(socket.id);
+        console.log(index2);
+        socketIds.splice(index2, 1);
+        console.log(socketIds);
     })
 
     socket.on('startGame', function (numberOfPlayers) {
@@ -216,29 +224,29 @@ io.sockets.on('connection', function (socket) {
     socket.on('missionVoteBtnOnClick', function (arrayNumber, numberPlayerInVote, playersInCurrentMissionServer) {
         playersInMissionVote = numberPlayerInVote;
         if (numberPlayerInVote === 1) {
-            io.to(playersInGame[arrayNumber]).emit('beginMissionVote', playersInCurrentMissionServer);
+            io.to(socketIds[arrayNumber]).emit('beginMissionVote', playersInCurrentMissionServer);
         }
         else if (numberPlayerInVote === 2) {
-            io.to(playersInGame[arrayNumber[0]]).emit('beginMissionVote', playersInCurrentMissionServer);
-            io.to(playersInGame[arrayNumber[1]]).emit('beginMissionVote', playersInCurrentMissionServer);
+            io.to(socketIds[arrayNumber[0]]).emit('beginMissionVote', playersInCurrentMissionServer);
+            io.to(socketIds[arrayNumber[1]]).emit('beginMissionVote', playersInCurrentMissionServer);
         }
         else if (numberPlayerInVote === 3) {
-            io.to(playersInGame[arrayNumber[0]]).emit('beginMissionVote', playersInCurrentMissionServer);
-            io.to(playersInGame[arrayNumber[1]]).emit('beginMissionVote', playersInCurrentMissionServer);
-            io.to(playersInGame[arrayNumber[2]]).emit('beginMissionVote', playersInCurrentMissionServer);
+            io.to(socketIds[arrayNumber[0]]).emit('beginMissionVote', playersInCurrentMissionServer);
+            io.to(socketIds[arrayNumber[1]]).emit('beginMissionVote', playersInCurrentMissionServer);
+            io.to(socketIds[arrayNumber[2]]).emit('beginMissionVote', playersInCurrentMissionServer);
         }
         else if (numberPlayerInVote === 4) {
-            io.to(playersInGame[arrayNumber[0]]).emit('beginMissionVote', playersInCurrentMissionServer);
-            io.to(playersInGame[arrayNumber[1]]).emit('beginMissionVote', playersInCurrentMissionServer);
-            io.to(playersInGame[arrayNumber[2]]).emit('beginMissionVote', playersInCurrentMissionServer);
-            io.to(playersInGame[arrayNumber[3]]).emit('beginMissionVote', playersInCurrentMissionServer);
+            io.to(socketIds[arrayNumber[0]]).emit('beginMissionVote', playersInCurrentMissionServer);
+            io.to(socketIds[arrayNumber[1]]).emit('beginMissionVote', playersInCurrentMissionServer);
+            io.to(socketIds[arrayNumber[2]]).emit('beginMissionVote', playersInCurrentMissionServer);
+            io.to(socketIds[arrayNumber[3]]).emit('beginMissionVote', playersInCurrentMissionServer);
         }
         else if (numberPlayerInVote === 5) {
-            io.to(playersInGame[arrayNumber[0]]).emit('beginMissionVote', playersInCurrentMissionServer);
-            io.to(playersInGame[arrayNumber[1]]).emit('beginMissionVote', playersInCurrentMissionServer);
-            io.to(playersInGame[arrayNumber[2]]).emit('beginMissionVote', playersInCurrentMissionServer);
-            io.to(playersInGame[arrayNumber[3]]).emit('beginMissionVote', playersInCurrentMissionServer);
-            io.to(playersInGame[arrayNumber[4]]).emit('beginMissionVote', playersInCurrentMissionServer);
+            io.to(socketIds[arrayNumber[0]]).emit('beginMissionVote', playersInCurrentMissionServer);
+            io.to(socketIds[arrayNumber[1]]).emit('beginMissionVote', playersInCurrentMissionServer);
+            io.to(socketIds[arrayNumber[2]]).emit('beginMissionVote', playersInCurrentMissionServer);
+            io.to(socketIds[arrayNumber[3]]).emit('beginMissionVote', playersInCurrentMissionServer);
+            io.to(socketIds[arrayNumber[4]]).emit('beginMissionVote', playersInCurrentMissionServer);
         }
 
     });
