@@ -70,32 +70,32 @@ io.sockets.on('connection', function (socket) {
         socket.emit('showTeamButton');
         socket.broadcast.emit('showTeamButton');
         if (numberOfPlayers == 5) {
-            pickedDeck = cards6;
+            cards5 = ['spy!', 'spy!', 'part of the resistance!', 'part of the resistance!', 'part of the resistance!']
             pickedDeck = cards5;
             shuffleDeck(pickedDeck);
             console.log('Players set to 5');
         } else if (numberOfPlayers == 6) {
-            pickedDeck = cards5;
+            cards6 = ['spy!', 'spy!', 'part of the resistance!', 'part of the resistance!', 'part of the resistance!', 'part of the resistance!']
             pickedDeck = cards6;
             shuffleDeck(pickedDeck);
             console.log('Players set to 6');
         } else if (numberOfPlayers == 7) {
-            pickedDeck = cards5;
+            cards7 = ['spy!', 'spy!', 'spy!', 'part of the resistance!', 'part of the resistance!', 'part of the resistance!', 'part of the resistance!']
             pickedDeck = cards7;
             shuffleDeck(pickedDeck);
             console.log('Players set to 7');
         } else if (numberOfPlayers == 8) {
-            pickedDeck = cards5;
+            cards8 = ['spy!', 'spy!', 'spy!', 'part of the resistance!', 'part of the resistance!', 'part of the resistance!', 'part of the resistance!', 'part of the resistance!']
             pickedDeck = cards8;
             shuffleDeck(pickedDeck);
             console.log('Players set to 8');
         } else if (numberOfPlayers == 9) {
-            pickedDeck = cards5;
+            cards9 = ['spy!', 'spy!', 'spy!', 'part of the resistance!', 'part of the resistance!', 'part of the resistance!', 'part of the resistance!', 'part of the resistance!', 'part of the resistance!']
             pickedDeck = cards9;
             shuffleDeck(pickedDeck);
             console.log('Players set to 9');
         } else if (numberOfPlayers == 10) {
-            pickedDeck = cards5;
+            cards10 = ['spy!', 'spy!', 'spy!', 'spy!', 'part of the resistance!', 'part of the resistance!', 'part of the resistance!', 'part of the resistance!', 'part of the resistance!', 'part of the resistance!']
             pickedDeck = cards10;
             shuffleDeck(pickedDeck);
             console.log('Players set to 10');
