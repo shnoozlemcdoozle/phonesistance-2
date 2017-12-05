@@ -11,6 +11,7 @@ var cards5 = ['spy!', 'spy!', 'part of the resistance!', 'part of the resistance
 
 var pickedDeck = 0;
 var playersInGame = [];
+var dictatedPlayersInGame = 0;
 var teamVoteApprove = 0;
 var teamVoteVeto = 0;
 var teamVoteResponses = 0;
@@ -74,31 +75,37 @@ io.sockets.on('connection', function (socket) {
             pickedDeck = cards5;
             shuffleDeck(pickedDeck);
             console.log('Players set to 5');
+            dictatedPlayersInGame = 5;
         } else if (numberOfPlayers == 6) {
             cards6 = ['spy!', 'spy!', 'part of the resistance!', 'part of the resistance!', 'part of the resistance!', 'part of the resistance!']
             pickedDeck = cards6;
             shuffleDeck(pickedDeck);
             console.log('Players set to 6');
+            dictatedPlayersInGame = 6;
         } else if (numberOfPlayers == 7) {
             cards7 = ['spy!', 'spy!', 'spy!', 'part of the resistance!', 'part of the resistance!', 'part of the resistance!', 'part of the resistance!']
             pickedDeck = cards7;
             shuffleDeck(pickedDeck);
             console.log('Players set to 7');
+            dictatedPlayersInGame = 7;
         } else if (numberOfPlayers == 8) {
             cards8 = ['spy!', 'spy!', 'spy!', 'part of the resistance!', 'part of the resistance!', 'part of the resistance!', 'part of the resistance!', 'part of the resistance!']
             pickedDeck = cards8;
             shuffleDeck(pickedDeck);
             console.log('Players set to 8');
+            dictatedPlayersInGame = 8;
         } else if (numberOfPlayers == 9) {
             cards9 = ['spy!', 'spy!', 'spy!', 'part of the resistance!', 'part of the resistance!', 'part of the resistance!', 'part of the resistance!', 'part of the resistance!', 'part of the resistance!']
             pickedDeck = cards9;
             shuffleDeck(pickedDeck);
             console.log('Players set to 9');
+            dictatedPlayersInGame = 9;
         } else if (numberOfPlayers == 10) {
             cards10 = ['spy!', 'spy!', 'spy!', 'spy!', 'part of the resistance!', 'part of the resistance!', 'part of the resistance!', 'part of the resistance!', 'part of the resistance!', 'part of the resistance!']
             pickedDeck = cards10;
             shuffleDeck(pickedDeck);
             console.log('Players set to 10');
+            dictatedPlayersInGame = 10;
         }
     })
 
@@ -171,8 +178,8 @@ io.sockets.on('connection', function (socket) {
     socket.on('playerVoteApprove', function () {
         teamVoteApprove += 1;
         teamVoteResponses += 1;
-        socket.emit('playerVotedTeam', teamVoteResponses, playersInGame);
-        socket.broadcast.emit('playerVotedTeam', teamVoteResponses, playersInGame);
+        socket.emit('playerVotedTeam', teamVoteResponses, dictatedPlayersInGame);
+        socket.broadcast.emit('playerVotedTeam', teamVoteResponses, dictatedPlayersInGame);
         if (teamVoteResponses == playersInGame) {
             socket.emit('teamVoteFinished', teamVoteApprove, teamVoteVeto);
             socket.broadcast.emit('teamVoteFinished', teamVoteApprove, teamVoteVeto);
@@ -183,14 +190,16 @@ io.sockets.on('connection', function (socket) {
     socket.on('playerVoteVeto', function () {
         teamVoteVeto += 1;
         teamVoteResponses += 1;
-        socket.emit('playerVotedTeam', teamVoteResponses, playersInGame);
-        socket.broadcast.emit('playerVotedTeam', teamVoteResponses, playersInGame);
+        socket.emit('playerVotedTeam', teamVoteResponses, dictatedPlayersInGame);
+        socket.broadcast.emit('playerVotedTeam', teamVoteResponses, dictatedPlayersInGame);
         if (teamVoteResponses == playersInGame) {
             socket.emit('teamVoteFinished', teamVoteApprove, teamVoteVeto);
             socket.broadcast.emit('teamVoteFinished', teamVoteApprove, teamVoteVeto);
             console.log("Team vote is finished")
         }
     });
+
+    
 
     socket.on('teamVoteFinishedReset', function () {
         teamVoteApprove = 0;
