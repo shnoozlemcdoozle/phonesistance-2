@@ -93,6 +93,7 @@ io.sockets.on('connection', function (socket) {
         var chosenCard = pickedDeck.shift();
 
         socket.emit('teamCard', chosenCard);
+    });
 
 
 
