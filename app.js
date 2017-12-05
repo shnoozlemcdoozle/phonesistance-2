@@ -41,6 +41,8 @@ io.sockets.on('connection', function (socket) {
         playersInGame.push(username);
         socket.broadcast.emit('playersInGameUpdate', playersInGame);
         socket.emit('playersInGameUpdate', playersInGame);
+        console.log(playersInGame);
+        console.log(playersInGameSocketIds);
     });
 
     socket.on('disconnect', function() {
