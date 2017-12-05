@@ -67,10 +67,25 @@ io.sockets.on('connection', function (socket) {
     })
 
     socket.on('startGame', function(numberOfPlayers) {
-        var deckWordHelp = 'cards' + numberOfPlayers
-        pickedDeck = deckWordHelp;
-        console.log(pickedDeck);
-        console.log(pickedDeck[2]);
+        if (numberOfPlayers == 5) {
+            pickedDeck = cards5;
+            console.log('Players set to 5');
+        } else if (numberOfPlayers == 6) {
+            pickedDeck = cards6;
+            console.log('Players set to 6');
+        } else if (numberOfPlayers == 7) {
+            pickedDeck = cards7;
+            console.log('Players set to 7');
+        } else if (numberOfPlayers == 8) {
+            pickedDeck = cards8;
+            console.log('Players set to 8');
+        } else if (numberOfPlayers == 9) {
+            pickedDeck = cards9;
+            console.log('Players set to 9');
+        } else if (numberOfPlayers == 10) {
+            pickedDeck = cards10;
+            console.log('Players set to 10');
+        }
     })
 
 
