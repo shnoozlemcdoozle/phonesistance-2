@@ -105,6 +105,11 @@
                 }
             });
         });
+        document.getElementById("poke").style.display = "none";
+        
+        socket.on('showTeamButton', function() {
+            document.getElementById("poke").style.display = "inline";
+        })
 
         document.getElementById("teamSpot").style.display = "none"; 
         $('#poke').on('click touchstart', function () {

@@ -67,6 +67,7 @@ io.sockets.on('connection', function (socket) {
     })
 
     socket.on('startGame', function (numberOfPlayers) {
+        socket.emit('showTeamButton');
         if (numberOfPlayers == 5) {
             pickedDeck = cards5;
             console.log('Players set to 5');
