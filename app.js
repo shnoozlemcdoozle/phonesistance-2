@@ -51,8 +51,8 @@ io.sockets.on('connection', function (socket) {
     socket.emit('connectionUser');
 
     socket.on('userConnected', function (username) {
-        playersInGame.push(username);
         socket.username = username;
+        playersInGame.push(socket.username);
         socket.broadcast.emit('playersInGameUpdate', playersInGame);
         socket.emit('playersInGameUpdate', playersInGame);
         console.log(playersInGame);
