@@ -68,7 +68,7 @@ io.sockets.on('connection', function (socket) {
 
     socket.on('startGame', function (numberOfPlayers) {
         socket.emit('showTeamButton');
-        socket.broadcast.emit('showTeamButton');
+        socket.broadcast.emit('showTeamButton', numberOfPlayers);
         if (numberOfPlayers == 5) {
             cards5 = ['spy!', 'spy!', 'part of the resistance!', 'part of the resistance!', 'part of the resistance!']
             pickedDeck = cards5;

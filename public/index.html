@@ -107,10 +107,39 @@
         });
         document.getElementById("poke").style.display = "none";
         
-        socket.on('showTeamButton', function() {
+        socket.on('showTeamButton', function(numberOfPlayersBoard) {
             document.getElementById("poke").style.display = "inline";
             sentTeam = 0;
             $('#teamSpot').empty();
+            if (numberOfPlayersBoard === "5") {
+                $('#box1').empty().append("2");
+                $('#box2').empty().append("3");
+                $('#box3').empty().append("2");
+                $('#box4').empty().append("3");
+                $('#box5').empty().append("3");
+            }
+            else if (numberOfPlayersBoard === "6") {
+                $('#box1').empty().append("2");
+                $('#box2').empty().append("3");
+                $('#box3').empty().append("4");
+                $('#box4').empty().append("3");
+                $('#box5').empty().append("4");
+            }
+            else if (numberOfPlayersBoard === "7") {
+                $('#box1').empty().append("2");
+                $('#box2').empty().append("3");
+                $('#box3').empty().append("3");
+                $('#box4').empty().append("4*");
+                $('#box5').empty().append("4");
+            }
+            else if (numberOfPlayersBoard === "8" || numberOfPlayersBoard === "9" || numberOfPlayersBoard === "10") {
+                $('#box1').empty().append("3");
+                $('#box2').empty().append("4");
+                $('#box3').empty().append("4");
+                $('#box4').empty().append("5*");
+                $('#box5').empty().append("5");
+            }
+        })
         })
 
         document.getElementById("teamSpot").style.display = "none"; 
