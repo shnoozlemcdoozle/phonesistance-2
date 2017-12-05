@@ -109,6 +109,8 @@
         
         socket.on('showTeamButton', function() {
             document.getElementById("poke").style.display = "inline";
+            sentTeam = 0;
+            $('#teamSpot').empty();
         })
 
         document.getElementById("teamSpot").style.display = "none"; 
