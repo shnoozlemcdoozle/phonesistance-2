@@ -313,13 +313,16 @@
             });
         });
 
+        // RESET VOTE BUTTON
+
          $('#resetVoteBtn').click(function () {
             socket.emit('resetVoteBtnOnClick');
         });
 
         socket.on('resetProgressBar', function() {
             $('#currentVoteCount').empty();
-        })
+            console.log('Vote resetted');
+        });
 
         // MISSION VOTING
 
