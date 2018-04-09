@@ -313,6 +313,11 @@
             });
         });
 
+         $('#resetVoteBtn').click(function () {
+            socket.emit('teamVoteFinishedReset');
+            socket.emit('missionVoteFinishedReset');
+        });
+
         // MISSION VOTING
 
         $('#missionVoteBtn').click(function () {
