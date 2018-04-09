@@ -317,6 +317,7 @@
 
          $('#resetVoteBtn').click(function () {
             socket.emit('resetVoteBtnOnClick');
+            console.log('Reset Vote button hit');
         });
 
         socket.on('resetProgressBar', function() {
