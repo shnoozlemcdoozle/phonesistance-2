@@ -207,12 +207,24 @@ io.sockets.on('connection', function (socket) {
         }
     });
 
-    
 
     socket.on('teamVoteFinishedReset', function () {
         teamVoteApprove = 0;
         teamVoteVeto = 0;
         teamVoteResponses = 0;
+        
+    });
+
+    socket.on('resetVoteBtnClick', function() {
+        socket.emit('resetProgressBar');
+        socket.broadcast.emit('resetProgressBar');
+        teamVoteApprove = 0;
+        teamVoteVeto = 0;
+        teamVoteResponses = 0;
+        missionVotePass = 0;
+        missionVoteFail = 0;
+        missionVoteResponses = 0;
+        playersInMissionVote = 0;
     });
 
     // MISSION VOTING
@@ -280,6 +292,11 @@ io.sockets.on('connection', function (socket) {
         missionVoteFail = 0;
         missionVoteResponses = 0;
         playersInMissionVote = 0;
+            
     });
 
 });
+
+function newFunction() {
+    return 'resetVoteBtnOnClick';
+}
